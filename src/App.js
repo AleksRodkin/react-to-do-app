@@ -1,27 +1,38 @@
+import { useState } from "react";
+
+import Task from "./components/Task";
+import Header from "./components/Header";
+import tasksData from "./data/tasks";
+
 function App() {
+  const [tasks, setTasks] = useState(tasksData);
+
+  const openTasks = tasks.filter((task) => !task.isDone);
+  const closedTasks = tasks.filter((task) => task.isDone);
+
+  const toggleTask = (id) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, isDone: !task.isDone } : task
+      )
+    );
+  };
+
   return (
     <div className="wrapper clear p-30">
-      <div className="header d-flex justify-between">
-        <div className="header__text">
-          <h1>To-DO-DO-DO</h1>
-        </div>
-        <div className="header__buttons d-flex align-center">
-          <ul className="d-flex justify-center">
-            <li className="mr-30">1</li>
-            <li className="mr-30">2</li>
-            <li className="">3</li>
-          </ul>
-        </div>
-      </div>
-      <div className="tasks-container">
-        <div class="task-open"></div>
-        <div>
-          <input type="checkbox" id="coding" name="interest" value="coding" />
-          <label for="coding">Coding</label>
-        </div>
-        <div>
-          <input type="checkbox" id="music" name="interest" value="music" />
-          <label for="music">Music</label>
+      <Header />
+      <div className="container">
+        <div className="container-tasks">
+          <div class="container-tasks__opened">
+            {openTasks.map((task) => (
+              <Task key={task.id} task={task} toggleTask={toggleTask} />
+            ))}
+          </div>
+          <div class="container-tasks__closed">
+            {closedTasks.map((task) => (
+              <Task key={task.id} task={task} toggleTask={toggleTask} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
