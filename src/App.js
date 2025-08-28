@@ -18,19 +18,44 @@ function App() {
     );
   };
 
+  const startEditing = (id) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, isEditing: true } : task
+      )
+    );
+  };
+  
+  const saveTask = (id, newText) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, text: newText, isEditing: false } : task
+      )
+    );
+  };
+
   return (
     <div className="wrapper clear p-30">
       <Header />
       <div className="container">
         <div className="container-tasks">
-          <div class="container-tasks__opened">
+          <div className="container-tasks__opened">
             {openTasks.map((task) => (
-              <Task key={task.id} task={task} toggleTask={toggleTask} />
+              <Task key={task.id} task={task} toggleTask={toggleTask} startEditing={startEditing}
+              saveTask={saveTask} />
             ))}
           </div>
-          <div class="container-tasks__closed">
+          <div className="container-tasks__add">
+            <button className="button-new-task" type="button">
+              + Новый пункт
+            </button>
+
+            {/* <button className="button-add">Добавить</button> */}
+          </div>
+          <div className="container-tasks__closed mt-30">
             {closedTasks.map((task) => (
-              <Task key={task.id} task={task} toggleTask={toggleTask} />
+              <Task key={task.id} task={task} toggleTask={toggleTask} startEditing={startEditing}
+              saveTask={saveTask} />
             ))}
           </div>
         </div>
