@@ -1,4 +1,4 @@
-function Task({ task, toggleTask, startEditing, saveTask }) {
+function Task({ task, toggleTask, startEditing, saveTask, deleteTask }) {
   return (
     <div className="task">
       <input
@@ -19,10 +19,12 @@ function Task({ task, toggleTask, startEditing, saveTask }) {
         />
       ) : (
         <span
+          className="task__span"
           style={{ textDecoration: task.isDone ? "line-through" : "none" }}
           onDoubleClick={() => startEditing(task.id)}
         >
           {task.text}
+          <span className="delete-btn" onClick={() => deleteTask(task.id)}>Х</span>
         </span>
       )}
     </div>

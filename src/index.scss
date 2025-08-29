@@ -20,18 +20,49 @@ body {
 
 .task {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  &__span {
+    width: 300px;
+    min-height: 20px;
+    border: 1px solid transparent;
+    padding-left: 4px;
+    padding-right: 20px;
+    position: relative;
+    overflow-wrap: break-word;
+
+  &:hover {
+    border: 1px black solid;
+  }
+
+    .delete-btn {
+      position: absolute;
+      right: 1px;
+      display: none;
+      top: 50%;
+      transform: translateY(-50%);
+      color: red;
+      font-weight: bold;
+      cursor: pointer;
+      padding-right: 4px;
+    }
+
+    &:hover .delete-btn {
+      display: inline-block;
+    }
+  }
 }
 
 .button-new-task {
-    margin-left: 15px;
-    margin-top: 5px;
-    font-size: 16px;
-    color: gray;
-    background: none;
-    border: none;
-    cursor: pointer;
-    
+  margin-left: 16px;
+  margin-top: 5px;
+  font-size: 16px;
+  color: gray;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .container-tasks__closed {
