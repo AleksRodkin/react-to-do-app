@@ -1,4 +1,4 @@
-function Header() {
+const Header: React.FC = () => {
   return (
     <header className="header d-flex justify-between mb-30">
       <div className="header__text">

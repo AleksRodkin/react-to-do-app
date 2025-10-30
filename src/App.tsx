@@ -3,14 +3,15 @@ import { useState } from "react";
 import Task from "./components/Task";
 import Header from "./components/Header";
 import tasksData from "./data/tasks";
+import type { TaskType } from "./types";
 
-function App() {
-  const [tasks, setTasks] = useState(tasksData);
+const App = () => {
+  const [tasks, setTasks] = useState<TaskType[]>(tasksData);
 
   const openTasks = tasks.filter((task) => !task.isDone);
   const closedTasks = tasks.filter((task) => task.isDone);
 
-  const toggleTask = (id) => {
+  const toggleTask = (id: number) => {
     setTasks((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, isDone: !task.isDone } : task
@@ -19,7 +20,7 @@ function App() {
   };
 
   const addNewTask = () => {
-    const newTask = {
+    const newTask: TaskType = {
       id: Date.now(),
       text: "",  
       isDone: false,            
@@ -28,7 +29,7 @@ function App() {
     setTasks((prev) => [...prev, newTask]);
   };
 
-  const startEditing = (id) => {
+  const startEditing = (id: number) => {
     setTasks((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, isEditing: true } : task
@@ -36,7 +37,7 @@ function App() {
     );
   };
   
-  const saveTask = (id, newText) => {
+  const saveTask = (id: number, newText: string) => {
     setTasks((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, text: newText, isEditing: false } : task
@@ -44,7 +45,7 @@ function App() {
     );
   };
 
-  const deleteTask = (id) => {
+  const deleteTask = (id: number) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 

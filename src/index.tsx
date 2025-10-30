@@ -4,12 +4,10 @@ import './index.scss';
 import App from './App';
 import 'macro-css';
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
-

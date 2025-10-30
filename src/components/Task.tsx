@@ -1,4 +1,6 @@
-function Task({ task, toggleTask, startEditing, saveTask, deleteTask }) {
+import type { TaskProps } from '../types'
+
+function Task({ task, toggleTask, startEditing, saveTask, deleteTask }: TaskProps) {
   return (
     <div className="task">
       <input
@@ -14,7 +16,7 @@ function Task({ task, toggleTask, startEditing, saveTask, deleteTask }) {
           autoFocus
           onBlur={(e) => saveTask(task.id, e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") saveTask(task.id, e.target.value);
+            if (e.key === "Enter") saveTask(task.id, e.currentTarget.value);
           }}
         />
       ) : (
